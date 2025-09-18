@@ -33,7 +33,7 @@ public class Menu {
                     effectuerVersement();   
                     break;
                 case 3:
-                    System.out.println("Effectuer un retrait");
+                    effectuerRetrait();
                     break;
                 case 4:
                     System.out.println("Effectuer un virement");
@@ -134,6 +134,28 @@ public class Menu {
         }else{
             System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
         }
+    }
+
+    private void effectuerRetrait(){
+        System.out.println("--- Effectuer un retrait ---");
+        System.out.print("Entrez le code de votre compte (ex: CPT-12345) : ");
+        String code = scanner.nextLine();
+
+        Compte compte=comptes.get(code);
+        
+        if (compte != null){
+            System.out.print("Entrez le montant à retirer : ");
+            double montant=scanner.nextDouble();
+            scanner.nextLine();
+
+            System.out.print("Entrez la destination du retrait: ");
+            String destination = scanner.nextLine();
+
+            compte.retirer(montant, destination);
+        }else {
+            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+        }
+
     }
     
 }
