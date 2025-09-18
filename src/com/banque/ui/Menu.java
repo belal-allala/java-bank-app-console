@@ -30,7 +30,7 @@ public class Menu {
                     creerCompte();
                     break;
                 case 2:
-                    System.out.println("Effectuer un versement");   
+                    effectuerVersement();   
                     break;
                 case 3:
                     System.out.println("Effectuer un retrait");
@@ -113,6 +113,27 @@ public class Menu {
         }
 
 
+    }
+
+    private void effectuerVersement(){
+
+        System.out.println("--- Effectuer un versement ---");
+        System.out.print("Entrez le code du compte destinataire (ex: CPT-12345) : ");
+        String code = scanner.nextLine();
+        Compte compte=comptes.get(code);
+
+        if(compte != null){
+            System.out.print("Entrez le montant à verser : ");
+            double montant=scanner.nextDouble();
+            scanner.nextLine();
+
+            System.out.print("Entrez la source du versement ");
+            String source=scanner.nextLine();
+            compte.verser(montant, source);
+
+        }else{
+            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+        }
     }
     
 }
