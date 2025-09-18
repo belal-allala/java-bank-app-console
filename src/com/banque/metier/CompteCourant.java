@@ -23,7 +23,7 @@ public class CompteCourant extends Compte {
         return 0;
     }
     
-    public double detDecouvert(){
+    public double getDecouvert(){
         return decouvert;
     }
 

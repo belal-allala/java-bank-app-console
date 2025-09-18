@@ -39,7 +39,7 @@ public class Menu {
                     effectuerVirement();
                     break;
                 case 5:
-                    System.out.println("Consulter le solde");
+                    consulterSolde();
                     break;
                 case 6:
                     System.out.println("Consulter les opérations");
@@ -204,6 +204,20 @@ public class Menu {
             System.out.println("Virement impossible : Solde insuffisant sur le compte source.");
         }
 
+    }
+
+    private void consulterSolde() {
+        System.out.println("--- Consulter le solde et les détails d'un compte ---");
+        System.out.print("Entrez le code du compte à consulter (ex: CPT-12345) : ");
+        String code = scanner.nextLine();
+    
+        Compte compte = comptes.get(code);
+    
+        if (compte != null) {
+            compte.afficherDetails();
+        } else {
+            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+        }
     }
     
 }
