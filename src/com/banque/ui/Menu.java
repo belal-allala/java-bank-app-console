@@ -3,6 +3,9 @@ package com.banque.ui;
 import com.banque.metier.Compte;
 import com.banque.metier.CompteCourant;
 import com.banque.metier.CompteEpargne;
+import com.banque.metier.Operation;
+import com.banque.metier.Versement;
+import com.banque.metier.Retrait;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Random;
@@ -42,7 +45,7 @@ public class Menu {
                     consulterSolde();
                     break;
                 case 6:
-                    System.out.println("Consulter les opérations");
+                    consulterOperations();
                     break;
                 case 0:
                 System.out.println("Merci d'avoir utilisé Javalution Banque. Au revoir !");
@@ -215,6 +218,44 @@ public class Menu {
     
         if (compte != null) {
             compte.afficherDetails();
+        } else {
+            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+        }
+    }
+
+    private void consulterOperations() {
+        System.out.println("--- Consulter l'historique des opérations ---");
+        System.out.print("Entrez le code du compte (ex: CPT-12345) : ");
+        String code = scanner.nextLine();
+    
+        Compte compte = comptes.get(code);
+    
+        if (compte != null) {
+            System.out.println("--- Historique des opérations pour le compte " + code + " ---");
+            for (Operation op : compte.getListeOperations()) {
+                String typeOperation = "";
+                String details = "";
+    
+                if (op instanceof Versement) {
+                    typeOperation = "[+] Versement";
+                    Versement v = (Versement) op;
+                    details = " | Source: " + v.getSource();
+                } else if (op instanceof Retrait) {
+                    typeOperation = "[-] Retrait";
+                    Retrait r = (Retrait) op;
+                    details = " | Destination: " + r.getDestination();
+                }
+    
+                System.out.println(
+                    op.getDate() + " | " + 
+                    typeOperation + 
+                    " | Montant: " + String.format("%.2f", op.getMontant()) + " EUR" +
+                    details
+                );
+            }
+            System.out.println("--------------------------------------------------");
+            System.out.println("Solde actuel : " + String.format("%.2f", compte.getSolde()) + " EUR");
+    
         } else {
             System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
         }
