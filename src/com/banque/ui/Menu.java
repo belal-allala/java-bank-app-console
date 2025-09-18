@@ -36,7 +36,7 @@ public class Menu {
                     effectuerRetrait();
                     break;
                 case 4:
-                    System.out.println("Effectuer un virement");
+                    effectuerVirement();
                     break;
                 case 5:
                     System.out.println("Consulter le solde");
@@ -154,6 +154,54 @@ public class Menu {
             compte.retirer(montant, destination);
         }else {
             System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+        }
+
+    }
+
+    private void effectuerVirement(){
+        System.out.println("--- Effectuer un virement ---");
+
+        System.out.print("Entrez le code du compte source (celui qui envoie) : ");
+        String codeSource=scanner.nextLine();
+        Compte compteSource= comptes.get(codeSource);
+
+        System.out.print("Entrez le code du compte destinataire (celui qui reçoit) : ");
+        String codeDestinataire=scanner.nextLine();
+        Compte compteDestinataire= comptes.get(codeDestinataire);
+
+        if (compteSource==null){
+            System.out.println("Erreur : Compte source introuvable.");
+            return;
+        }
+
+        if (compteDestinataire==null){
+            System.out.println("Erreur : Compte  destinataire introuvable.");
+            return;
+        }
+
+        System.out.print("Entrez le montant à virer : ");
+        double montant= scanner.nextDouble();
+        scanner.nextLine();
+
+        double soldeSourceApres = compteSource.getSolde() - montant;
+        boolean retraitPossible = false;
+
+        if (compteSource instanceof CompteCourant) {
+            if (soldeSourceApres >= -((CompteCourant) compteSource).getDecouvert()) {
+                retraitPossible = true;
+            }
+        } else if (compteSource instanceof CompteEpargne) {
+            if (soldeSourceApres >= 0) {
+                retraitPossible = true;
+            }
+        }
+
+        if (retraitPossible) {
+            compteSource.retirer(montant, "Virement vers " + codeDestinataire);
+            compteDestinataire.verser(montant, "Virement depuis " + codeSource);
+            System.out.println("Virement effectué avec succès !");
+        } else {
+            System.out.println("Virement impossible : Solde insuffisant sur le compte source.");
         }
 
     }
