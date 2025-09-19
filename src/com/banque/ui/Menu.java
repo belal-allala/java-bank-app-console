@@ -24,7 +24,7 @@ public class Menu {
         int choix;
         do {
             afficherMenuPrincipal();
-            System.out.println("Entrez votre choix : ");
+            System.out.println("Entrez votre choix:");
             choix = scanner.nextInt();
             scanner.nextLine();
 
@@ -47,6 +47,9 @@ public class Menu {
                 case 6:
                     consulterOperations();
                     break;
+                case 7:
+                    listerTousLesComptes();
+                    break;
                 case 0:
                 System.out.println("Merci d'avoir utilisé Javalution Banque. Au revoir !");
                     break;
@@ -67,6 +70,7 @@ public class Menu {
         System.out.println("4. Effectuer un virement");
         System.out.println("5. Consulter le solde d'un compte");
         System.out.println("6. Consulter la liste des opérations d'un compte");
+        System.out.println("7. Lister tous les comptes");
         System.out.println("0. Quitter");
         System.out.println("=======================================");
     }
@@ -260,5 +264,19 @@ public class Menu {
             System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
         }
     }
+
+    private void listerTousLesComptes() {
+        System.out.println("--- Liste de tous les comptes enregistrés ---");
+    
+        if (comptes.isEmpty()) {
+            System.out.println("Aucun compte n'a été créé pour le moment.");
+        } else {
+            for (Compte compte : comptes.values()) {
+                compte.afficherDetails();
+                System.out.println();
+            }
+        }
+    }
+
     
 }
