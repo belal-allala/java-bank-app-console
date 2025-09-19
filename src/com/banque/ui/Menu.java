@@ -291,16 +291,21 @@ public class Menu {
     }
 
     private void consulterSolde() {
-        System.out.println("--- Consulter le solde et les détails d'un compte ---");
+        System.out.println("--- Consulter le solde et les details d un compte ---");
         System.out.print("Entrez le code du compte à consulter (ex: CPT-12345) : ");
         String code = scanner.nextLine();
+
+        if (!code.matches("^CPT-\\d{5}$")) {
+            System.out.println("Erreur : Le format du code est invalide. Le format attendu est CPT-XXXXX.");
+            return; 
+        }
     
         Compte compte = comptes.get(code);
     
         if (compte != null) {
             compte.afficherDetails();
         } else {
-            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+            System.out.println("Erreur : Aucun compte trouve avec le code " + code);
         }
     }
 
