@@ -81,13 +81,35 @@ public class Menu {
         System.out.println("Choisissez le type de compte :");
         System.out.println("1. Compte Courant");
         System.out.println("2. Compte Épargne");
-        System.out.print("Votre choix : ");
 
-        int typeCompte = scanner.nextInt();
+        int typeCompte = -1;
+        while(typeCompte != 1 && typeCompte != 2 ){
+            System.out.print("Votre choix : ");
+            if(scanner.hasNextInt()){
+                typeCompte = scanner.nextInt();
+                if (typeCompte != 1 && typeCompte != 2) {
+                    System.out.println("Erreur : Veuillez choisir 1 ou 2.");
+                }
+            }else{
+                System.out.println("Erreur : Entree invalide. Veuillez choisir 1 ou 2.");
+                scanner.next();
+            }
+        }
         scanner.nextLine();
 
-        System.out.print("Entrez le solde initial : ");
-        double soldeInitial = scanner.nextDouble();
+        double soldeInitial=-1;
+        while (soldeInitial < 0) {
+            System.out.print("Entrez le solde initial : ");
+            if(scanner.hasNextInt()){
+                soldeInitial = scanner.nextDouble();
+                if (soldeInitial < 0) {
+                    System.out.println("Erreur : Le solde initial ne peut pas etre negatif.");
+                }
+            }else{
+                System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                scanner.next();
+            }
+        }
         scanner.nextLine();
 
         Random rand = new Random();
@@ -98,27 +120,48 @@ public class Menu {
         }while (comptes.containsKey(code));
 
         if(typeCompte==1){
-            System.out.print("Entrez le découvert autorisé : ");
-            double decouvert = scanner.nextDouble();
+            double decouvert = -1;
+            while (decouvert < 0) {
+                System.out.print("Entrez le decouvert: ");
+                if (scanner.hasNextDouble()) {
+                    decouvert = scanner.nextDouble();
+                    if (decouvert < 0) {
+                        System.out.println("Erreur : Le decouvert ne peut pas etre negatif.");
+                    }
+                } else {
+                    System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                    scanner.next();
+                }
+            }
             scanner.nextLine();
 
             CompteCourant cc = new CompteCourant(code, soldeInitial, decouvert);
             comptes.put(code, cc);
-            System.out.println("Compte Courant créé avec succès ! Votre code de compte est : " + code);
+            System.out.println("Compte Courant cree avec succes ! Votre code de compte est : " + code);
 
         }else if(typeCompte==2){
-            System.out.print("Entrez le taux d'intérêt (ex: 0.03 pour 3%) : ");
-            double taux = scanner.nextDouble();
+            double taux = -1;
+            while (taux <= 0) {
+                System.out.print("Entrez le taux d'interet : ");
+                if (scanner.hasNextDouble()) {
+                    taux = scanner.nextDouble();
+                    if (taux <= 0) {
+                        System.out.println("Erreur : Le taux d'interet doit etre strictement positif.");
+                    }
+                } else {
+                    System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                    scanner.next();
+                }
+            }
             scanner.nextLine();
 
             CompteEpargne cp = new CompteEpargne(code, soldeInitial, taux);
             comptes.put(code, cp);
-            System.out.println("Compte Épargne créé avec succès ! Votre code de compte est : " + code);
+            System.out.println("Compte Epargne cree avec succes ! Votre code de compte est : " + code);
 
         }else {
             System.out.println("Type de compte invalide.");
         }
-
 
     }
 
