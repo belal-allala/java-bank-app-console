@@ -36,7 +36,7 @@ public class Menu {
         int choix;
         do {
             afficherMenuPrincipal();
-            System.out.print(CYAN + "💰 Entrez votre choix: " + RESET);
+            System.out.print(CYAN + "Entrez votre choix: " + RESET);
             choix = scanner.nextInt();
             scanner.nextLine();
 

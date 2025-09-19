@@ -131,7 +131,7 @@ java -jar JavalutionBanque.jar
 
 ```bash
 # 1. Compiler tous les fichiers .java
-javac -d . src/com/banque/**/*.java
+javac -d . src/com/banque/Main.java src/com/banque/metier/*.java src/com/banque/ui/*.java
 
 # 2. Exécuter l'application
 java com.banque.Main
@@ -142,21 +142,22 @@ java com.banque.Main
     │                            📸 CAPTURES D'ÉCRAN                              
     └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
-### 🏠 Écran d'accueil
+<div align="center">
+###  Écran d'accueil
 ![Écran d'accueil](screenshots/accueil.png)
 
-### 📋 Menu principal
+###  Menu principal
 ![Menu principal](screenshots/menu.png)
 
-### 💳 Création d'un compte
+###  Création d'un compte
 ![Création d'un compte](screenshots/creation_compte.png)
 
-### 📊 Historique des opérations
+###  Historique des opérations
 ![Historique des opérations](screenshots/historique.png)
 
-### 📝 Liste de tous les comptes
+###  Liste de tous les comptes
 ![Liste de tous les comptes](screenshots/liste_comptes.png)
+</div>
 
 ```
     ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -164,11 +165,11 @@ java com.banque.Main
     └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-1. **🚀 Lancez l'application** avec `java -jar JavalutionBanque.jar`
-2. **📋 Naviguez dans le menu** en saisissant le numéro de l'option désirée
-3. **💳 Créez vos comptes** (courant ou épargne) selon vos besoins
-4. **💰 Effectuez vos opérations** (versements, retraits, virements)
-5. **📊 Consultez l'historique** pour suivre toutes vos transactions
+1. ** Lancez l'application** avec `java -jar JavalutionBanque.jar`
+2. ** Naviguez dans le menu** en saisissant le numéro de l'option désirée
+3. ** Créez vos comptes** (courant ou épargne) selon vos besoins
+4. ** Effectuez vos opérations** (versements, retraits, virements)
+5. ** Consultez l'historique** pour suivre toutes vos transactions
 
 
 </div>
