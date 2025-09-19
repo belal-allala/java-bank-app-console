@@ -206,8 +206,19 @@ public class Menu {
         Compte compte=comptes.get(code);
         
         if (compte != null){
-            System.out.print("Entrez le montant à retirer : ");
-            double montant=scanner.nextDouble();
+            double montant = -1;
+            while (montant <= 0) {
+                System.out.print("Entrez le montant a retirer: ");
+                if (scanner.hasNextDouble()) {
+                    montant = scanner.nextDouble();
+                    if (montant <= 0) {
+                        System.out.println("Erreur : Le montant du retrait doit etre strictement positif.");
+                    }
+                } else {
+                    System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                    scanner.next(); 
+                }
+            }
             scanner.nextLine();
 
             System.out.print("Entrez la destination du retrait: ");
@@ -215,7 +226,7 @@ public class Menu {
 
             compte.retirer(montant, destination);
         }else {
-            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+            System.out.println("Erreur : Aucun compte trouve avec le code " + code);
         }
 
     }
@@ -241,7 +252,7 @@ public class Menu {
             return;
         }
 
-        System.out.print("Entrez le montant à virer : ");
+        System.out.print("Entrez le montant a virer : ");
         double montant= scanner.nextDouble();
         scanner.nextLine();
 
