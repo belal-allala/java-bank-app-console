@@ -143,6 +143,7 @@ java com.banque.Main
     └─────────────────────────────────────────────────────────────────────────────┘
 ```
 <div align="center">
+
 ###  Écran d'accueil
 ![Écran d'accueil](screenshots/accueil.png)
 
