@@ -252,8 +252,19 @@ public class Menu {
             return;
         }
 
-        System.out.print("Entrez le montant a virer : ");
-        double montant= scanner.nextDouble();
+        double montant = -1;
+        while (montant <= 0) {
+            System.out.print("Entrez le montant a virer: ");
+            if (scanner.hasNextDouble()) {
+                montant = scanner.nextDouble();
+                if (montant <= 0) {
+                    System.out.println("Erreur : Le montant du virement doit etre strictement positif.");
+                }
+            } else {
+                System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                scanner.next(); 
+            }
+        }
         scanner.nextLine();
 
         double soldeSourceApres = compteSource.getSolde() - montant;
@@ -272,7 +283,7 @@ public class Menu {
         if (retraitPossible) {
             compteSource.retirer(montant, "Virement vers " + codeDestinataire);
             compteDestinataire.verser(montant, "Virement depuis " + codeSource);
-            System.out.println("Virement effectué avec succès !");
+            System.out.println("Virement effectue avec succes !");
         } else {
             System.out.println("Virement impossible : Solde insuffisant sur le compte source.");
         }
