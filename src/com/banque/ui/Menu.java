@@ -310,14 +310,19 @@ public class Menu {
     }
 
     private void consulterOperations() {
-        System.out.println("--- Consulter l'historique des opérations ---");
+        System.out.println("--- Consulter l historique des operations ---");
         System.out.print("Entrez le code du compte (ex: CPT-12345) : ");
         String code = scanner.nextLine();
     
+        if (!code.matches("^CPT-\\d{5}$")) {
+            System.out.println("Erreur : Le format du code est invalide. Le format attendu est CPT-XXXXX.");
+            return;
+        }
+
         Compte compte = comptes.get(code);
     
         if (compte != null) {
-            System.out.println("--- Historique des opérations pour le compte " + code + " ---");
+            System.out.println("--- Historique des operations pour le compte " + code + " ---");
             for (Operation op : compte.getListeOperations()) {
                 String typeOperation = "";
                 String details = "";
@@ -359,6 +364,4 @@ public class Menu {
             }
         }
     }
-
-    
 }
