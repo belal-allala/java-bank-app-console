@@ -168,13 +168,25 @@ public class Menu {
     private void effectuerVersement(){
 
         System.out.println("--- Effectuer un versement ---");
-        System.out.print("Entrez le code du compte destinataire (ex: CPT-12345) : ");
+        System.out.print("Entrez le code du compte destinataire : ");
         String code = scanner.nextLine();
         Compte compte=comptes.get(code);
 
         if(compte != null){
-            System.out.print("Entrez le montant à verser : ");
-            double montant=scanner.nextDouble();
+
+            double montant = -1;
+            while(montant < 0){
+                System.out.print("Entrez le montant a verser : ");
+                if(scanner.hasNextInt()){
+                    montant=scanner.nextDouble();
+                    if(montant<0){
+                        System.out.println("Erreur : Le montant du versement doit etre strictement positif.");
+                    }
+                }else{
+                    System.out.println("Erreur : Veuillez entrer une valeur numerique valide.");
+                    scanner.next();
+                }
+            }
             scanner.nextLine();
 
             System.out.print("Entrez la source du versement ");
@@ -182,7 +194,7 @@ public class Menu {
             compte.verser(montant, source);
 
         }else{
-            System.out.println("Erreur : Aucun compte trouvé avec le code " + code);
+            System.out.println("Erreur : Aucun compte trouve avec le code " + code);
         }
     }
 
