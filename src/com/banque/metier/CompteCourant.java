@@ -28,10 +28,26 @@ public class CompteCourant extends Compte {
     }
 
     public void afficherDetails() {
-        System.out.println("--- Détails du Compte Courant ---");
-        System.out.println("Code du compte : " + this.getCode());
-        System.out.println("Solde actuel : " + String.format("%.2f", this.getSolde()) + " EUR");
-        System.out.println("Découvert autorisé : " + String.format("%.2f", this.decouvert) + " EUR");
-        System.out.println("---------------------------------");
+        String RESET = "\u001B[0m";
+        String CYAN = "\u001B[36m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
+        String BLUE = "\u001B[34m";
+        String RED = "\u001B[31m";
+        String BOLD = "\u001B[1m";
+        
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println(CYAN + "|" + BOLD + "           COMPTE COURANT - DETAILS            " + RESET + CYAN + "|" + RESET);
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println(CYAN + "|" + RESET);
+        System.out.println(CYAN + "| " + BLUE + "[#] Code du compte      : " + YELLOW + this.getCode() + RESET);
+        System.out.println(CYAN + "| " + GREEN + "[$] Solde actuel        : " + BOLD + String.format("%.2f", this.getSolde()) + " EUR" + RESET);
+        System.out.println(CYAN + "| " + RED + "[!] Decouvert autorise  : " + YELLOW + String.format("%.2f", this.decouvert) + " EUR" + RESET);
+        
+        double soldeDisponible = this.getSolde() + this.decouvert;
+        System.out.println(CYAN + "| " + GREEN + "[=] Solde disponible    : " + BOLD + String.format("%.2f", soldeDisponible) + " EUR" + RESET);
+        System.out.println(CYAN + "|" + RESET);
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println();
     }
 }

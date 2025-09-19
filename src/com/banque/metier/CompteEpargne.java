@@ -25,12 +25,24 @@ public class CompteEpargne extends Compte {
     }
 
     public void afficherDetails(){
-        System.out.println("--- Détails du Compte Épargne ---");
-        System.out.println("Code du compte : " + this.getCode());
-        System.out.println("Solde actuel : " + String.format("%.2f", this.getSolde()) + " EUR");
-        System.out.println("Taux d'intérêt : " + (this.tauxInteret * 100) + " %");
-        System.out.println("Intérêts calculés : " + String.format("%.2f", this.calculerInteret()) + " EUR");
-        System.out.println("----------------------------------");
+        String RESET = "\u001B[0m";
+        String CYAN = "\u001B[36m";
+        String GREEN = "\u001B[32m";
+        String YELLOW = "\u001B[33m";
+        String BLUE = "\u001B[34m";
+        String BOLD = "\u001B[1m";
+        
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println(CYAN + "|" + BOLD + "           COMPTE EPARGNE - DETAILS            " + RESET + CYAN + "|" + RESET);
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println(CYAN + "|" + RESET);
+        System.out.println(CYAN + "| " + BLUE + "[#] Code du compte    : " + YELLOW + this.getCode() + RESET);
+        System.out.println(CYAN + "| " + GREEN + "[$] Solde actuel      : " + BOLD + String.format("%.2f", this.getSolde()) + " EUR" + RESET);
+        System.out.println(CYAN + "| " + BLUE + "[%] Taux d'interet    : " + YELLOW + String.format("%.2f", this.tauxInteret * 100) + " %" + RESET);
+        System.out.println(CYAN + "| " + GREEN + "[+] Interets calcules : " + BOLD + String.format("%.2f", this.calculerInteret()) + " EUR" + RESET);
+        System.out.println(CYAN + "|" + RESET);
+        System.out.println(CYAN + "+================================================+" + RESET);
+        System.out.println();
     }
 
     public double getTauxInteret(){
